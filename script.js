@@ -131,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         // url: https://formspree.io/f/mblrbdal
-        fetch("none", {
+        fetch("https://formspree.io/f/mblrbdal", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
