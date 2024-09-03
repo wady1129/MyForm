@@ -1,26 +1,32 @@
-/* styles-mobile.css */
-
+/* 基本設置 */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f8f9fa;
     margin: 0;
     padding: 10px;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
     color: #343a40;
 }
 
+/* 標題設計 */
 h1 {
-    font-size: 32px;
+    font-size: 28px;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 h2 {
     font-size: 24px;
     margin-bottom: 15px;
+    text-align: center;
 }
 
+/* 按鈕設計 */
 button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 18px;
     background-color: #007bff;
     color: white;
@@ -29,25 +35,42 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
     margin: 8px;
+    width: 100%; /* 讓按鈕佔滿整個容器寬度 */
+    max-width: 300px; /* 設置最大寬度，以免過度拉伸 */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
+/* 隱藏元素 */
+.hidden {
+    display: none;
+}
+
+/* 測驗容器設計 */
 #quiz-container {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
     width: 100%;
+    max-width: 400px; /* 限制寬度以適應手機 */
     text-align: center;
 }
 
+/* 選項容器設計 */
 #options-container {
-    display: block;
+    display: flex;
+    flex-direction: column;
     margin-top: 10px;
+    gap: 10px; /* 增加選項間距 */
+}
+
+/* 視頻容器設計 */
+#video-container {
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 video {
