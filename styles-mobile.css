@@ -24,7 +24,7 @@ h2 {
     text-align: center;
 }
 
-/* 按鈕設計 */
+/* 按鈕容器設計 */
 button {
     padding: 12px 24px;
     font-size: 18px;
@@ -34,9 +34,14 @@ button {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin: 8px;
     width: 100%; /* 讓按鈕佔滿整個容器寬度 */
     max-width: 300px; /* 設置最大寬度，以免過度拉伸 */
+}
+
+/* 父容器設置為flexbox，讓按鈕居中 */
+button {
+    margin: 0 auto; /* 水平居中按鈕 */
+    display: block; /* 确保按钮作为块级元素占据容器宽度 */
 }
 
 button:hover {
