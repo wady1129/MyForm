@@ -17,6 +17,7 @@ let currentQuestionIndex = 0;
 let answers = [];
 let startTime;
 let videoEndTime;
+let apiEndpoint;
 let userInfo = {}; // 保存用户基本資料
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,12 +31,50 @@ document.addEventListener("DOMContentLoaded", () => {
     const videoElement = document.getElementById("video");
 
     submitInfoButton.onclick = () => {
+        const email = document.getElementById("email").value;
         const gender = document.getElementById("gender").value;
         const experience = document.getElementById("experience").value;
-
-        if (gender && experience) {
+    
+        if (email && gender && experience) {
+            userInfo.email = email;
             userInfo.gender = gender;
             userInfo.experience = experience;
+    
+            // 亂數產生 0 或 1
+            const randomNum = Math.floor(Math.random() * 9);
+    
+            // 根據亂數結果決定 API URL
+            if (randomNum == 0) {
+                apiEndpoint = "https://formspree.io/f/mblrbdal";
+            }
+            else if (randomNum == 1) {
+                apiEndpoint = "https://formspree.io/f/mjkbzwwa";
+            }
+            else if (randomNum == 2) {
+                apiEndpoint = "https://formspree.io/f/xovabdwa";
+            }
+            else if (randomNum == 3) {
+                apiEndpoint = "https://formspree.io/f/mgvwqkye";
+            }
+            else if (randomNum == 4) {
+                apiEndpoint = "https://formspree.io/f/mpwandrw";
+            }
+            else if (randomNum == 5) {
+                apiEndpoint = "https://formspree.io/f/mkgwerbo";
+            }
+            else if (randomNum == 6) {
+                apiEndpoint = "https://formspree.io/f/mwpezobo";
+            }
+            else if (randomNum == 7) {
+                apiEndpoint = "https://formspree.io/f/mrbzdqkk";
+            } else {
+                apiEndpoint = "https://formspree.io/f/xldrvbjv";
+            }
+    
+            // 更新表單的 action 屬性
+            const form = document.getElementById("basic-info-form");
+            form.action = apiEndpoint;
+    
             basicInfoForm.classList.add("hidden");
             mainMenu.classList.remove("hidden");
         } else {
@@ -129,9 +168,8 @@ document.addEventListener("DOMContentLoaded", () => {
             userInfo: userInfo,
             answers: answers
         };
-
-        // url: https://formspree.io/f/mblrbdal
-        fetch("https://formspree.io/f/mblrbdal", {
+    
+        fetch(apiEndpoint, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
