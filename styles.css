@@ -1,29 +1,90 @@
+/* 基本設置 */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif; /* Google 的標準字體 */
     background-color: #f8f9fa;
     margin: 0;
-    padding: 20px;
+    padding: 40px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
     box-sizing: border-box;
-    color: #343a40;
+    color: #212121;
 }
 
-h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
+/* 基本資料輸入區使用 Material Design 風格 */
+#basic-info-form {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Material Design 的陰影 */
+    width: 100%;
+    max-width: 600px; /* 限制寬度以適應桌面設備 */
+    margin-bottom: 40px;
 }
 
-h2 {
-    font-size: 35px;
+/* 基本資料輸入區的標題 */
+#basic-info-form h1 {
+    font-size: 32px;
     margin-bottom: 20px;
+    color: #212121;
+    text-align: center;
+}
+
+/* 電子郵件和駕駛資料的輸入框 */
+#basic-info-form label {
+    font-size: 16px;
+    color: #424242;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#basic-info-form input, #basic-info-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #fafafa; /* 增加背景色以增強視覺效果 */
+}
+
+/* 提交按鈕的設計 */
+#submit-info-button {
+    padding: 14px 28px;
+    font-size: 18px;
+    background-color: #1E88E5; /* Material Design 主題色 */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material Design 陰影 */
+    margin-top: 10px;
+}
+
+#submit-info-button:hover {
+    background-color: #1565C0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 保持原有設計風格的其他區域 */
+#main-menu, #quiz-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
 }
 
 button {
-    padding: 15px 30px;
-    font-size: 22px;
+    padding: 16px 36px;
+    font-size: 24px;
     background-color: #007bff;
     color: white;
     border: none;
@@ -37,16 +98,13 @@ button:hover {
     background-color: #0056b3;
 }
 
-.hidden {
-    display: none;
-}
-
+/* 測驗區域的樣式 */
 #quiz-container {
     background-color: white;
-    padding: 30px;
+    padding: 40px;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
+    max-width: 900px;
     width: 100%;
     text-align: center;
 }
@@ -55,14 +113,41 @@ button:hover {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 20px;
 }
 
 #video-container {
     margin-bottom: 20px;
+    width: 100%;
 }
 
 video {
     border-radius: 8px;
     width: 100%;
-    height: auto;
+    height: 400px;
+}
+
+/* 輸入表單的 hover 效果 */
+#basic-info-form input:hover, #basic-info-form select:hover {
+    border-color: #1E88E5;
+}
+
+/* 按鈕在測驗區域的樣式 */
+#quiz-container button {
+    padding: 12px 28px;
+    font-size: 20px;
+    border-radius: 6px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#quiz-container button:hover {
+    background-color: #218838;
+}
+
+/* 隱藏區域 */
+.hidden {
+    display: none;
 }
