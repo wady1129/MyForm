@@ -1,66 +1,93 @@
 /* 基本設置 */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Roboto', sans-serif; /* 使用 Google 的字型 Roboto */
+    background-color: #ffffff; /* 更接近 Google 的白色背景 */
     margin: 0;
-    padding: 10px;
+    padding: 20px; /* 增加內邊距以避免內容擁擠 */
     display: flex;
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    color: #343a40;
+    color: #202124; /* 更接近 Google 的黑色文本顏色 */
 }
 
 /* 標題設計 */
 h1 {
-    font-size: 28px;
-    margin-bottom: 15px;
+    font-size: 32px; /* 增加標題字體大小 */
+    margin-bottom: 20px; /* 增加間距 */
     text-align: center;
+    color: #202124; /* Google 標準文本顏色 */
 }
 
 h2 {
     font-size: 24px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     text-align: center;
+    color: #202124;
+}
+
+/* 基本資料表單設計 */
+#basic-info-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 更細緻的陰影 */
+    width: 100%;
+    max-width: 400px; /* 限制寬度以適應手機 */
+    text-align: center;
+    box-sizing: border-box; /* 確保內邊距和邊框包含在元素的總寬度和高度內 */
+}
+
+/* 表單元素設計 */
+input[type="text"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* 確保內邊距和邊框包含在元素的總寬度和高度內 */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+select:focus {
+    border-color: #007bff; /* 聚焦時顯示藍色邊框 */
+    outline: none; /* 移除默認的聚焦樣式 */
 }
 
 /* 按鈕容器設計 */
 button {
     padding: 12px 24px;
-    font-size: 18px;
+    font-size: 16px;
     background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 4px; /* 更小的圓角 */
     cursor: pointer;
     transition: background-color 0.3s;
-    width: 100%; /* 讓按鈕佔滿整個容器寬度 */
-    max-width: 300px; /* 設置最大寬度，以免過度拉伸 */
-}
-
-/* 父容器設置為flexbox，讓按鈕居中 */
-button {
-    margin: 0 auto; /* 水平居中按鈕 */
-    display: block; /* 确保按钮作为块级元素占据容器宽度 */
+    width: 100%;
+    max-width: 300px;
+    margin-top: 20px; /* 向下移動按鈕 */
 }
 
 button:hover {
     background-color: #0056b3;
 }
 
-/* 隱藏元素 */
 .hidden {
     display: none;
 }
 
 /* 測驗容器設計 */
 #quiz-container {
-    background-color: white;
+    background-color: #ffffff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 400px; /* 限制寬度以適應手機 */
+    max-width: 400px;
     text-align: center;
 }
 
@@ -69,7 +96,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
-    gap: 10px; /* 增加選項間距 */
+    gap: 10px;
 }
 
 /* 視頻容器設計 */
@@ -81,5 +108,5 @@ button:hover {
 video {
     width: 100%;
     height: auto;
-    border-radius: 6px;
+    border-radius: 4px;
 }
