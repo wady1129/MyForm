@@ -17,7 +17,7 @@ body {
     padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Material Design 的陰影 */
-    width: 100%;
+    width: 85%;
     max-width: 600px; /* 限制寬度以適應桌面設備 */
     margin-bottom: 40px;
 }
