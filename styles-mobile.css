@@ -69,9 +69,11 @@ button {
     transition: background-color 0.3s;
     width: 100%;
     max-width: 300px;
-    margin-top: 20px; /* 向下移動按鈕 */
+    margin-top: 20px;
+    display: block; /* 確保按鈕作為塊級元素 */
     margin-left: auto;
     margin-right: auto;
+    text-align: center; /* 保證文字居中 */
 }
 
 button:hover {
@@ -111,4 +113,12 @@ video {
     width: 100%;
     height: auto;
     border-radius: 4px;
+}
+
+#result-container {
+    margin-top: 40px;  /* 與其他內容保持距離 */
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 增加一點陰影讓結果區更明顯 */
 }
