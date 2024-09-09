@@ -20,6 +20,7 @@ body {
     width: 85%;
     max-width: 600px; /* 限制寬度以適應桌面設備 */
     margin-bottom: 40px;
+    text-align: center;
 }
 
 /* 基本資料輸入區的標題 */
@@ -63,6 +64,8 @@ body {
     max-width: 400px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Material Design 陰影 */
     margin-top: 10px;
+    margin: 0 auto;
+    display: block;
 }
 
 #submit-info-button:hover {
@@ -150,4 +153,12 @@ video {
 /* 隱藏區域 */
 .hidden {
     display: none;
+}
+
+#result-container {
+    margin-top: 40px;  /* 與其他內容保持距離 */
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 增加一點陰影讓結果區更明顯 */
 }
