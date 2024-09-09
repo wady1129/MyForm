@@ -33,44 +33,50 @@ document.addEventListener("DOMContentLoaded", () => {
     submitInfoButton.onclick = () => {
         const email = document.getElementById("email").value;
         const gender = document.getElementById("gender").value;
+        const age = document.getElementById("age").value;
+        const frequency = document.getElementById("frequency").value;
         const experience = document.getElementById("experience").value;
     
-        if (email && gender && experience) {
+        if (email && gender && age && frequency && experience) {
             userInfo.email = email;
             userInfo.gender = gender;
+            userInfo.age = age;
+            userInfo.frequency = frequency;
             userInfo.experience = experience;
     
             // 亂數產生 0 或 1
             const randomNum = Math.floor(Math.random() * 9);
     
             // 根據亂數結果決定 API URL
-            if (randomNum == 0) {
-                apiEndpoint = "https://formspree.io/f/mblrbdal";
-            }
-            else if (randomNum == 1) {
-                apiEndpoint = "https://formspree.io/f/mjkbzwwa";
-            }
-            else if (randomNum == 2) {
-                apiEndpoint = "https://formspree.io/f/xovabdwa";
-            }
-            else if (randomNum == 3) {
-                apiEndpoint = "https://formspree.io/f/mgvwqkye";
-            }
-            else if (randomNum == 4) {
-                apiEndpoint = "https://formspree.io/f/mpwandrw";
-            }
-            else if (randomNum == 5) {
-                apiEndpoint = "https://formspree.io/f/mkgwerbo";
-            }
-            else if (randomNum == 6) {
-                apiEndpoint = "https://formspree.io/f/mwpezobo";
-            }
-            else if (randomNum == 7) {
-                apiEndpoint = "https://formspree.io/f/mrbzdqkk";
-            } else {
-                apiEndpoint = "https://formspree.io/f/xldrvbjv";
-            }
-    
+            // if (randomNum == 0) {
+            //     apiEndpoint = "https://formspree.io/f/mblrbdal";
+            // }
+            // else if (randomNum == 1) {
+            //     apiEndpoint = "https://formspree.io/f/mjkbzwwa";
+            // }
+            // else if (randomNum == 2) {
+            //     apiEndpoint = "https://formspree.io/f/xovabdwa";
+            // }
+            // else if (randomNum == 3) {
+            //     apiEndpoint = "https://formspree.io/f/mgvwqkye";
+            // }
+            // else if (randomNum == 4) {
+            //     apiEndpoint = "https://formspree.io/f/mpwandrw";
+            // }
+            // else if (randomNum == 5) {
+            //     apiEndpoint = "https://formspree.io/f/mkgwerbo";
+            // }
+            // else if (randomNum == 6) {
+            //     apiEndpoint = "https://formspree.io/f/mwpezobo";
+            // }
+            // else if (randomNum == 7) {
+            //     apiEndpoint = "https://formspree.io/f/mrbzdqkk";
+            // } else {
+            //     apiEndpoint = "https://formspree.io/f/xldrvbjv";
+            // }
+            
+            apiEndpoint = "https://formspree.io/f/mblrbdal";
+
             // 更新表單的 action 屬性
             const form = document.getElementById("basic-info-form");
             form.action = apiEndpoint;
@@ -122,45 +128,65 @@ document.addEventListener("DOMContentLoaded", () => {
         const videoPlayTime = (videoEndTime - startTime) / 1000;
         const responseTime = (endTime - startTime) / 1000;
         const timeTaken = responseTime - videoPlayTime;
-
+    
         const correct = selectedIndex === questions[currentQuestionIndex].answer;
         answers.push({
-            question: questions[currentQuestionIndex].question,
+            question: `第 ${currentQuestionIndex + 1} 題`, // 改成題號
             selectedOption: questions[currentQuestionIndex].options[selectedIndex],
             correct: correct,
             timeTaken: timeTaken.toFixed(2)
         });
-
+    
         currentQuestionIndex++;
         if (currentQuestionIndex < questions.length) {
             loadQuestion(currentQuestionIndex);
         } else {
             showResults();
-            saveResultsToFormspree();
         }
     }
 
     function showResults() {
+        // 隱藏其他不需要的元素
         questionElement.textContent = "測驗結束！";
         optionsContainer.innerHTML = "";
         videoElement.classList.add("hidden");
-
+    
         let correctCount = 0;
-
+    
+        // 顯示每個問題的選擇結果和正確答案
         answers.forEach((answer, index) => {
             const resultText = document.createElement("p");
-            resultText.textContent = `第${index + 1}題: ${answer.question} - 你選擇了: ${answer.selectedOption} (正確: ${answer.correct ? "是" : "否"}) - 用時: ${answer.timeTaken}秒`;
+            resultText.textContent = `第 ${index + 1} 題: 你選擇了: ${answer.selectedOption} (正確答案: ${questions[index].options[questions[index].answer]}) - 用時: ${answer.timeTaken}秒`;
             optionsContainer.appendChild(resultText);
             if (answer.correct) correctCount++;
         });
-
+    
+        // 計算答對率
         const score = (correctCount / questions.length) * 100;
+    
+        // 創建一個新的容器來顯示分數和答對率
+        const resultContainer = document.createElement("div");
+        resultContainer.id = "result-container"; // 給予這個容器一個ID，方便在CSS中設定位置
+        resultContainer.style.textAlign = "center"; // 讓結果文字置中
+    
+        // 顯示總答對題數
+        const correctCountText = document.createElement("p");
+        correctCountText.textContent = `你答對了 ${correctCount} 題`;
+        resultContainer.appendChild(correctCountText);
+    
+        // 顯示答對率
         const scoreText = document.createElement("p");
-        scoreText.textContent = `你答對了${correctCount}題，答對率為: ${score.toFixed(2)}%`;
-        optionsContainer.appendChild(scoreText);
-
+        scoreText.textContent = `答對率為: ${score.toFixed(2)}%`;
+        resultContainer.appendChild(scoreText);
+    
+        // 將結果容器插入到頁面底部
+        document.body.appendChild(resultContainer);
+    
+        // 顯示結果後繼續執行提交操作
         saveResultsToFormspree();
     }
+    
+    
 
     function saveResultsToFormspree() {
         let allResults = {
