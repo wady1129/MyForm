@@ -122,3 +122,68 @@ video {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* 增加一點陰影讓結果區更明顯 */
 }
+
+.question-block {
+    margin-bottom: 20px;
+}
+
+.question-block label {
+    display: block;  /* 將label顯示在textarea上方 */
+    margin-bottom: 5px;  /* 與textarea保持一些距離 */
+    font-weight: bold;  /* 可以選擇讓問題文字加粗 */
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    box-sizing: border-box;  /* 確保padding不影響整體寬度 */
+    resize: vertical;  /* 允許使用者垂直調整textarea的大小 */
+}
+
+#result-container {
+    margin: 20px auto;
+    text-align: center;
+    width: 80%;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#result-table th, #result-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+}
+
+#result-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+#result-table td {
+    text-align: center;
+}
+
+#result-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#result-table tr:hover {
+    background-color: #ddd;
+}
+
+#summary {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 20px;
+}
+
