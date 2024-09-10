@@ -133,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
         const correct = selectedIndex === questions[currentQuestionIndex].answer;
         answers.push({
-            question: `第 ${currentQuestionIndex + 1} 題`, // 改成題號
+            question: `第 ${currentQuestionIndex + 1} 題`,
             selectedOption: questions[currentQuestionIndex].options[selectedIndex],
             correct: correct,
             timeTaken: timeTaken.toFixed(2)
@@ -143,58 +143,92 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentQuestionIndex < questions.length) {
             loadQuestion(currentQuestionIndex);
         } else {
-            showResults();
+            showOpenEndedQuestions();  // 顯示開放性問題而不是直接顯示結果
         }
     }
 
+    function showOpenEndedQuestions() {
+        document.getElementById("quiz-container").classList.add("hidden");
+        document.getElementById("open-ended-questions").classList.remove("hidden");
+    
+        const submitOpenEndedButton = document.getElementById("submit-open-ended-button");
+        submitOpenEndedButton.onclick = () => {
+            userInfo.openEndedAnswers = {
+                q1: document.getElementById("open-ended-q1").value,
+                q2: document.getElementById("open-ended-q2").value,
+                q3: document.getElementById("open-ended-q3").value,
+                q4: document.getElementById("open-ended-q4").value,
+                q5: document.getElementById("open-ended-q5").value,
+            };
+            document.getElementById("open-ended-questions").classList.add("hidden");
+            showResults();  // 在填寫完開放性問題後顯示結果
+        };
+    }
+
     function showResults() {
-        // 隱藏其他不需要的元素
         questionElement.textContent = "測驗結束！";
-        optionsContainer.innerHTML = "";
-        videoElement.classList.add("hidden");
+        optionsContainer.innerHTML = "";  // 清空選項容器
+        videoElement.classList.add("hidden");  // 隱藏影片
+        document.getElementById("result-container").classList.remove("hidden");  // 顯示結果容器
+    
+        const resultTableBody = document.querySelector("#result-table tbody");
+        resultTableBody.innerHTML = "";  // 清空舊的結果
     
         let correctCount = 0;
     
-        // 顯示每個問題的選擇結果和正確答案
         answers.forEach((answer, index) => {
-            const resultText = document.createElement("p");
-            resultText.textContent = `第 ${index + 1} 題: 你選擇了: ${answer.selectedOption} (正確答案: ${questions[index].options[questions[index].answer]}) - 用時: ${answer.timeTaken}秒`;
-            optionsContainer.appendChild(resultText);
-            if (answer.correct) correctCount++;
+            const row = document.createElement("tr");
+    
+            // 題號
+            const questionNumberCell = document.createElement("td");
+            questionNumberCell.textContent = `第 ${index + 1} 題`;
+            row.appendChild(questionNumberCell);
+    
+            // 您的選擇
+            const selectedOptionCell = document.createElement("td");
+            selectedOptionCell.textContent = answer.selectedOption;
+            row.appendChild(selectedOptionCell);
+    
+            // 正確答案
+            const correctOptionCell = document.createElement("td");
+            correctOptionCell.textContent = questions[index].options[questions[index].answer];
+            row.appendChild(correctOptionCell);
+    
+            // 用時
+            const timeTakenCell = document.createElement("td");
+            timeTakenCell.textContent = answer.timeTaken + " 秒";
+            row.appendChild(timeTakenCell);
+    
+            resultTableBody.appendChild(row);
+    
+            if (answer.correct) {
+                correctCount++;
+            }
         });
     
-        // 計算答對率
-        const score = (correctCount / questions.length) * 100;
-    
-        // 創建一個新的容器來顯示分數和答對率
-        const resultContainer = document.createElement("div");
-        resultContainer.id = "result-container"; // 給予這個容器一個ID，方便在CSS中設定位置
-        resultContainer.style.textAlign = "center"; // 讓結果文字置中
-    
         // 顯示總答對題數
-        const correctCountText = document.createElement("p");
-        correctCountText.textContent = `你答對了 ${correctCount} 題`;
-        resultContainer.appendChild(correctCountText);
+        const correctCountText = `你答對了 ${correctCount} 題`;
+        const score = (correctCount / questions.length) * 100;
+        const scoreText = `答對率為: ${score.toFixed(2)}%`;
     
-        // 顯示答對率
-        const scoreText = document.createElement("p");
-        scoreText.textContent = `答對率為: ${score.toFixed(2)}%`;
-        resultContainer.appendChild(scoreText);
+        // 將總結訊息顯示在表格下方
+        document.getElementById("summary").innerHTML = `
+            <p>${correctCountText}</p>
+            <p>${scoreText}</p>
+        `;
     
-        // 將結果容器插入到頁面底部
-        document.body.appendChild(resultContainer);
-    
-        // 顯示結果後繼續執行提交操作
         saveResultsToFormspree();
     }
     
     
-
+    
+    
     function saveResultsToFormspree() {
         let allResults = {
             date: new Date().toLocaleString(),
             userInfo: userInfo,
-            answers: answers
+            answers: answers,
+            openEndedAnswers: userInfo.openEndedAnswers  // 加入開放性問題的答案
         };
     
         fetch(apiEndpoint, {
