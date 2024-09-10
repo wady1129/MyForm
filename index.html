@@ -85,6 +85,52 @@
         </div>
     </div>
 
+    <div id="open-ended-questions" class="hidden">
+        <h2>請簡單描述您對下列允許號誌燈的理解：</h2>
+    
+        <div class="question-block">
+            <label for="open-ended-q1">1. 綠色左轉箭頭燈號：</label>
+            <textarea id="open-ended-q1" rows="4" cols="50"></textarea>
+        </div>
+    
+        <div class="question-block">
+            <label for="open-ended-q2">2. 紅色左轉箭頭燈號：</label>
+            <textarea id="open-ended-q2" rows="4" cols="50"></textarea>
+        </div>
+    
+        <div class="question-block">
+            <label for="open-ended-q3">3. 黃色左轉箭頭燈號：</label>
+            <textarea id="open-ended-q3" rows="4" cols="50"></textarea>
+        </div>
+    
+        <div class="question-block">
+            <label for="open-ended-q4">4. 紅色圓形閃爍燈號：</label>
+            <textarea id="open-ended-q4" rows="4" cols="50"></textarea>
+        </div>
+    
+        <div class="question-block">
+            <label for="open-ended-q5">5. 黃色圓形閃爍燈號：</label>
+            <textarea id="open-ended-q5" rows="4" cols="50"></textarea>
+        </div>
+    
+        <button id="submit-open-ended-button">提交並查看結果</button>
+    </div>
+    <div id="result-container" class="hidden">
+        <h2>您的答題結果：</h2>
+        <table id="result-table">
+            <thead>
+                <tr>
+                    <th>題號</th>
+                    <th>您的選擇</th>
+                    <th>正確答案</th>
+                    <th>用時 (秒)</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="summary"></div> <!-- 用於顯示答對數與答對率 -->
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
