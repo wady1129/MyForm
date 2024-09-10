@@ -36,13 +36,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const age = document.getElementById("age").value;
         const frequency = document.getElementById("frequency").value;
         const experience = document.getElementById("experience").value;
+        const commute = document.getElementById("commute").value;
     
-        if (email && gender && age && frequency && experience) {
+        if (email && gender && age && frequency && experience && commute) {
             userInfo.email = email;
             userInfo.gender = gender;
             userInfo.age = age;
             userInfo.frequency = frequency;
             userInfo.experience = experience;
+            userInfo.commute = commute;
     
             // 亂數產生 0 或 1
             const randomNum = Math.floor(Math.random() * 9);
