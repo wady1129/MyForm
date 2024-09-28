@@ -189,3 +189,41 @@ textarea {
     margin-top: 20px;
 }
 
+.styled-table {
+    margin: 10px auto; /* 在手機上縮小邊距，使內容居中 */
+    border-collapse: collapse;
+    font-size: 14px; /* 字體大小稍微縮小，適合小螢幕 */
+    min-width: 100%; /* 在手機上表格寬度為全寬 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* 輕微陰影效果 */
+}
+
+.styled-table td {
+    padding: 10px; /* 減少單元格內邊距，適合手機尺寸 */
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.styled-table tr {
+    background-color: #f3f3f3;
+    color: #333;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.styled-table tr:hover {
+    background-color: #e0e0e0; /* 手機上滑鼠懸停效果變弱，避免手機交互干擾 */
+}
+
+.styled-table td:first-child {
+    border-left: 0;
+}
+
+.styled-table td:last-child {
+    border-right: 0;
+}
+
+.required {
+    color: red;
+}
