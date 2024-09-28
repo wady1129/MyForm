@@ -226,3 +226,43 @@ textarea {
     color: #333;
     margin-top: 20px;
 }
+
+.styled-table {
+    margin: 20px auto; /* 使表格在畫面中左右置中 */
+    border-collapse: collapse; /* 移除表格邊框之間的間隙 */
+    font-size: 18px;
+    min-width: 400px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.styled-table td {
+    padding: 12px 15px; /* 單元格內邊距 */
+    border: 1px solid #ddd; /* 單元格邊框 */
+    text-align: center; /* 文字置中 */
+}
+
+.styled-table tr {
+    background-color: #f3f3f3; /* 單元格背景顏色 */
+    color: #333;
+}
+
+.styled-table tr:nth-child(even) {
+    background-color: #f9f9f9; /* 偶數行的背景顏色 */
+}
+
+.styled-table tr:hover {
+    background-color: #f1f1f1; /* 滑鼠懸停時的背景色 */
+}
+
+.styled-table td:first-child {
+    border-left: 0; /* 移除左邊框，讓表格更美觀 */
+}
+
+.styled-table td:last-child {
+    border-right: 0; /* 移除右邊框 */
+}
+
+.required {
+    color: red;
+}
+
