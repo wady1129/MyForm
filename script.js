@@ -1,15 +1,51 @@
 const questions = [
     {
-        question: "如果您想左轉，並且看到顯示的交通信號，您會...",
-        options: ["前進", "讓行，等待間隙", "停下，等待間隙", "停下"],
+        question: "1.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
         answer: 1,
         video: "video1.mp4"
     },
     {
-        question: "如果您想左轉，並且看到顯示的交通信號，您會...",
-        options: ["前進", "讓行，等待間隙", "停下，等待間隙", "停下"],
-        answer: 2,
+        question: "2.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
+        answer: 1,
         video: "video2.mp4"
+    },
+    {
+        question: "3.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
+        answer: 1,
+        video: "video3.mp4"
+    },
+    {
+        question: "4.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
+        answer: 1,
+        video: "video4.mp4"
+    },
+    {
+        question: "5.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
+        answer: 1,
+        video: "video5.mp4"
+    },
+    {
+        question: "6.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
+        answer: 0,
+        video: "video6.mp4"
+    },
+    {
+        question: "7.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
+        answer: 1,
+        video: "video7.mp4"
+    },
+    {
+        question: "8.如果您想左轉，並且看到顯示的交通號誌，您會...",
+        options: ["直接左轉", "讓行，等待間隙", "停下"],
+        answer: 1,
+        video: "video8.mp4"
     },
 ];
 
@@ -101,35 +137,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function loadQuestion(index) {
         const currentQuestion = questions[index];
+        let hasOptionsShown = false;  // 追蹤選項是否已顯示
+        let firstplay = false
+        let optionsTimeout;  // 計時器變數
+    
+        // 設定題目和選項容器
         questionElement.textContent = currentQuestion.question;
-        optionsContainer.innerHTML = "";
-        optionsContainer.classList.add("hidden");
-
+        optionsContainer.innerHTML = "";  // 清空選項
+        optionsContainer.classList.add("hidden");  // 隱藏選項按鈕
+    
+        // 設定影片
         videoElement.src = currentQuestion.video;
         videoElement.play();
-
+    
+        // 當影片開始播放時
         videoElement.onplay = () => {
-            startTime = new Date();
+            if (!firstplay) {
+                startTime = new Date();
+                firstplay = true;
+            }
+    
+            // 設定 3 秒後顯示選項按鈕的計時器
+            optionsTimeout = setTimeout(() => {
+                if (!hasOptionsShown) {
+                    currentQuestion.options.forEach((option, i) => {
+                        const button = document.createElement("button");
+                        button.textContent = option;
+                        button.onclick = () => selectOption(i);
+                        optionsContainer.appendChild(button);
+                    });
+                    optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
+                    hasOptionsShown = true;  // 標記選項已經顯示
+                }
+            }, 3000);  // 延遲3秒 (3000毫秒)
         };
-
+    
+        // 當影片播放結束時
         videoElement.onended = () => {
             videoEndTime = new Date();
-
-            currentQuestion.options.forEach((option, i) => {
-                const button = document.createElement("button");
-                button.textContent = option;
-                button.onclick = () => selectOption(i);
-                optionsContainer.appendChild(button);
-            });
-            optionsContainer.classList.remove("hidden");
+    
+            // 清除計時器，防止選項按鈕在影片結束後才出現
+            clearTimeout(optionsTimeout);
+    
+            // 確保選項按鈕已經出現
+            if (!hasOptionsShown) {
+                currentQuestion.options.forEach((option, i) => {
+                    const button = document.createElement("button");
+                    button.textContent = option;
+                    button.onclick = () => selectOption(i);
+                    optionsContainer.appendChild(button);
+                });
+                optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
+                hasOptionsShown = true;
+            }
         };
     }
+    
 
     function selectOption(selectedIndex) {
         const endTime = new Date();
-        const videoPlayTime = (videoEndTime - startTime) / 1000;
-        const responseTime = (endTime - startTime) / 1000;
-        const timeTaken = responseTime - videoPlayTime;
+        const timeTaken = (endTime - startTime) / 1000 - 3.0;
     
         const correct = selectedIndex === questions[currentQuestionIndex].answer;
         answers.push({
@@ -153,15 +220,39 @@ document.addEventListener("DOMContentLoaded", () => {
     
         const submitOpenEndedButton = document.getElementById("submit-open-ended-button");
         submitOpenEndedButton.onclick = () => {
-            userInfo.openEndedAnswers = {
-                q1: document.getElementById("open-ended-q1").value,
-                q2: document.getElementById("open-ended-q2").value,
-                q3: document.getElementById("open-ended-q3").value,
-                q4: document.getElementById("open-ended-q4").value,
-                q5: document.getElementById("open-ended-q5").value,
-            };
-            document.getElementById("open-ended-questions").classList.add("hidden");
-            showResults();  // 在填寫完開放性問題後顯示結果
+            const u1 = document.getElementById("understand1").value;
+            const u2 = document.getElementById("understand2").value;
+            const u3 = document.getElementById("understand3").value;
+            const u4 = document.getElementById("understand4").value;
+            const u5 = document.getElementById("understand5").value;
+            const u6 = document.getElementById("understand6").value;
+            const u7 = document.getElementById("understand7").value;
+            const u8 = document.getElementById("understand8").value;
+            if (u1 && u2 && u3 && u4 && u5 && u6 && u7 && u8) {
+                userInfo.openEndedAnswers = {
+                    u1: document.getElementById("understand1").value,
+                    u2: document.getElementById("understand2").value,
+                    u3: document.getElementById("understand3").value,
+                    u4: document.getElementById("understand4").value,
+                    u5: document.getElementById("understand5").value,
+                    u6: document.getElementById("understand6").value,
+                    u7: document.getElementById("understand7").value,
+                    u8: document.getElementById("understand8").value,
+                    q1: document.getElementById("open-ended-q1").value,
+                    q2: document.getElementById("open-ended-q2").value,
+                    q3: document.getElementById("open-ended-q3").value,
+                    q4: document.getElementById("open-ended-q4").value,
+                    q5: document.getElementById("open-ended-q5").value,
+                    q6: document.getElementById("open-ended-q6").value,
+                    q7: document.getElementById("open-ended-q7").value,
+                    q8: document.getElementById("open-ended-q8").value,
+                };
+                document.getElementById("open-ended-questions").classList.add("hidden");
+                showResults();  // 在填寫完開放性問題後顯示結果
+
+            } else {
+                alert("請點選完成所有下拉式選單！");
+            }
         };
     }
 
