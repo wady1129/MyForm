@@ -66,12 +66,39 @@
         <div class="rules"></div>
             <h2>測驗規則</h2>
             <ol>
-                <li>總共20題，每題均為單選的選擇題</li>
-                <li>進入題目頁面後，駕駛模擬影片會自動撥放，播放結束後才可以點擊選項按鈕作答</li>
-                <li>看到綠色左轉箭頭燈號表示受保護左轉相位 (無需禮讓對向直行車)</li>
-                <li>看到紅色或黃色左轉箭頭燈號表示允許左轉相位 (需禮讓對向直行車)</li>
-                <li>看到紅色或黃色圓形閃爍燈號也表示允許左轉相位 (需禮讓對向直行車)</li>
+                <li>總共24題，每題均為判斷左轉行為決策的單選擇題</li>
+                <li>進入題目頁面後，駕駛模擬影片會自動播放</li>
+                <li>影片播放前3秒固定為紅燈時相，紅燈結束後依顯示號誌點擊選項按鈕作答</li>
             </ol>
+            <table class="styled-table">
+                <tr>
+                    <td>&nbsp;</td><td>主要號誌</td><td>左轉專用號誌</td><td>預設功能</td>
+                </tr>
+                <tr>
+                    <td>(a)</td><td>綠色圓形</td><td>黃色閃爍箭頭</td><td>可左轉(需讓行)</td>
+                </tr>
+                <tr>
+                    <td>(b)</td><td>綠色圓形</td><td>紅色閃爍箭頭</td><td>可左轉(需讓行)</td>
+                </tr>
+                <tr>
+                    <td>(c)</td><td>綠色圓形</td><td>黃色箭頭</td><td>可左轉(需讓行)</td>
+                </tr>
+                <tr>
+                    <td>(d)</td><td>綠色圓形</td><td>紅色箭頭</td><td>可左轉(需讓行)</td>
+                </tr>
+                <tr>
+                    <td>(e)</td><td>綠色圓形</td><td>(無)</td><td>可左轉(需讓行)</td>
+                </tr>
+                <tr>
+                    <td>(f)</td><td>紅色圓形</td><td>綠色箭頭</td><td>保護型左轉(不需讓行)</td>
+                </tr>
+                <tr>
+                    <td>(g)</td><td>紅色閃爍圓形</td><td>(無)</td><td>可左轉(需讓行)</td>
+                </tr>
+                <tr>
+                    <td>(h)</td><td>黃色閃爍圓形</td><td>(無)</td><td>可左轉(需讓行)</td>
+                </tr>
+            </table>
         </div>        
     </div>
 
@@ -86,31 +113,94 @@
     </div>
 
     <div id="open-ended-questions" class="hidden">
-        <h2>請簡單描述您對下列允許號誌燈的理解：</h2>
+        <h2>請簡單描述您對下列左轉號誌燈的理解：</h2>
     
         <div class="question-block">
-            <label for="open-ended-q1">1. 綠色左轉箭頭燈號：</label>
-            <textarea id="open-ended-q1" rows="4" cols="50"></textarea>
+            <label for="open-ended-q1">(a) 綠色圓形+黃色閃爍箭頭燈號：</label>
+            <textarea id="open-ended-q1" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand1" name="understand1" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
         </div>
     
         <div class="question-block">
-            <label for="open-ended-q2">2. 紅色左轉箭頭燈號：</label>
-            <textarea id="open-ended-q2" rows="4" cols="50"></textarea>
+            <label for="open-ended-q2">(b) 綠色圓形+紅色閃爍箭頭燈號：</label>
+            <textarea id="open-ended-q2" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand2" name="understand2" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
         </div>
     
         <div class="question-block">
-            <label for="open-ended-q3">3. 黃色左轉箭頭燈號：</label>
-            <textarea id="open-ended-q3" rows="4" cols="50"></textarea>
+            <label for="open-ended-q3">(c) 綠色圓形+黃色箭頭燈號：</label>
+            <textarea id="open-ended-q3" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand3" name="understand3" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
         </div>
     
         <div class="question-block">
-            <label for="open-ended-q4">4. 紅色圓形閃爍燈號：</label>
-            <textarea id="open-ended-q4" rows="4" cols="50"></textarea>
+            <label for="open-ended-q4">(d) 綠色圓形+紅色箭頭燈號：</label>
+            <textarea id="open-ended-q4" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand4" name="understand4" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
         </div>
     
         <div class="question-block">
-            <label for="open-ended-q5">5. 黃色圓形閃爍燈號：</label>
-            <textarea id="open-ended-q5" rows="4" cols="50"></textarea>
+            <label for="open-ended-q5">(e) 綠色圓形燈號：</label>
+            <textarea id="open-ended-q5" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand5" name="understand5" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <label for="open-ended-q6">(f) 紅色圓形+綠色箭頭燈號：</label>
+            <textarea id="open-ended-q6" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand6" name="understand6" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <label for="open-ended-q7">(g) 紅色閃爍圓形燈號：</label>
+            <textarea id="open-ended-q7" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand7" name="understand7" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
+        </div>
+
+        <div class="question-block">
+            <label for="open-ended-q8">(h) 黃色閃爍圓形燈號：</label>
+            <textarea id="open-ended-q8" rows="4" cols="50" placeholder="請輸入您的回答... (非必填)"></textarea>
+            <span class="required">*必填簡答:</span>
+            <select id="understand8" name="understand8" required>
+                <option value="">選擇理解度</option>
+                <option value="easy">易懂</option>
+                <option value="confuse">使人困惑</option>
+            </select>
         </div>
     
         <button id="submit-open-ended-button">提交並查看結果</button>
