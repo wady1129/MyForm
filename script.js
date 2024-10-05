@@ -242,21 +242,21 @@ function loadQuestion(index) {
         if (!firstplay) {
             startTime = new Date();
             firstplay = true;
+    
+            // 設定 3 秒後顯示選項按鈕的計時器
+            optionsTimeout = setTimeout(() => {
+                if (!hasOptionsShown) {
+                    currentQuestion.options.forEach((option, i) => {
+                        const button = document.createElement("button");
+                        button.textContent = option;
+                        button.onclick = () => selectOption(i);
+                        optionsContainer.appendChild(button);
+                    });
+                    optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
+                    hasOptionsShown = true;  // 標記選項已經顯示
+                }
+            }, 3000);  // 延遲3秒 (3000毫秒)
         }
-
-        // 設定 3 秒後顯示選項按鈕的計時器
-        optionsTimeout = setTimeout(() => {
-            if (!hasOptionsShown) {
-                currentQuestion.options.forEach((option, i) => {
-                    const button = document.createElement("button");
-                    button.textContent = option;
-                    button.onclick = () => selectOption(i);
-                    optionsContainer.appendChild(button);
-                });
-                optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
-                hasOptionsShown = true;  // 標記選項已經顯示
-            }
-        }, 3000);  // 延遲3秒 (3000毫秒)
     };
 
     // 當影片播放結束時
