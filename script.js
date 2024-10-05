@@ -237,12 +237,12 @@ function loadQuestion(index) {
     videoElement.setAttribute("playsinline", "true"); // 防止 iPhone Safari 全螢幕播放
     videoElement.setAttribute("webkit-playsinline", "true"); // 防止 iPhone Safari 全螢幕播放
 
-    // 當影片開始播放時
-    videoElement.onplay = () => {
+    // 當影片開始真正播放幀時
+    videoElement.onplaying = () => {
         if (!firstplay) {
             startTime = new Date();
             firstplay = true;
-    
+
             // 設定 3 秒後顯示選項按鈕的計時器
             optionsTimeout = setTimeout(() => {
                 if (!hasOptionsShown) {
@@ -284,6 +284,7 @@ function loadQuestion(index) {
         console.error("影片無法自動播放: ", error);
     });
 }
+
 
     
 
