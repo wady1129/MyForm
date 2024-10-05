@@ -219,51 +219,33 @@ document.addEventListener("DOMContentLoaded", () => {
         loadQuestion(currentQuestionIndex);
     };
 
-    function loadQuestion(index) {
-        const currentQuestion = questions[index];
-        let hasOptionsShown = false;  // 追蹤選項是否已顯示
-        let firstplay = false
-        let optionsTimeout;  // 計時器變數
-    
-        // 設定題目和選項容器
-        questionElement.textContent = currentQuestion.question;
-        optionsContainer.innerHTML = "";  // 清空選項
-        optionsContainer.classList.add("hidden");  // 隱藏選項按鈕
-    
-        // 設定影片
-        videoElement.src = currentQuestion.video;
-        videoElement.play();
-    
-        // 當影片開始播放時
-        videoElement.onplay = () => {
-            if (!firstplay) {
-                startTime = new Date();
-                firstplay = true;
-            }
-    
-            // 設定 3 秒後顯示選項按鈕的計時器
-            optionsTimeout = setTimeout(() => {
-                if (!hasOptionsShown) {
-                    currentQuestion.options.forEach((option, i) => {
-                        const button = document.createElement("button");
-                        button.textContent = option;
-                        button.onclick = () => selectOption(i);
-                        optionsContainer.appendChild(button);
-                    });
-                    optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
-                    hasOptionsShown = true;  // 標記選項已經顯示
-                }
-            }, 3000);  // 延遲3秒 (3000毫秒)
-        };
-    
-        // 當影片播放結束時
-        videoElement.onended = () => {
-            videoEndTime = new Date();
-    
-            // 清除計時器，防止選項按鈕在影片結束後才出現
-            clearTimeout(optionsTimeout);
-    
-            // 確保選項按鈕已經出現
+function loadQuestion(index) {
+    const currentQuestion = questions[index];
+    let hasOptionsShown = false;  // 追蹤選項是否已顯示
+    let firstplay = false;
+    let optionsTimeout;  // 計時器變數
+
+    // 設定題目和選項容器
+    questionElement.textContent = currentQuestion.question;
+    optionsContainer.innerHTML = "";  // 清空選項
+    optionsContainer.classList.add("hidden");  // 隱藏選項按鈕
+
+    // 設定影片屬性
+    videoElement.src = currentQuestion.video; // 動態設定影片來源
+    videoElement.setAttribute("autoplay", "true");
+    videoElement.setAttribute("muted", "true"); // 確保靜音以支持自動播放
+    videoElement.setAttribute("playsinline", "true"); // 防止 iPhone Safari 全螢幕播放
+    videoElement.setAttribute("webkit-playsinline", "true"); // 防止 iPhone Safari 全螢幕播放
+
+    // 當影片開始播放時
+    videoElement.onplay = () => {
+        if (!firstplay) {
+            startTime = new Date();
+            firstplay = true;
+        }
+
+        // 設定 3 秒後顯示選項按鈕的計時器
+        optionsTimeout = setTimeout(() => {
             if (!hasOptionsShown) {
                 currentQuestion.options.forEach((option, i) => {
                     const button = document.createElement("button");
@@ -272,10 +254,37 @@ document.addEventListener("DOMContentLoaded", () => {
                     optionsContainer.appendChild(button);
                 });
                 optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
-                hasOptionsShown = true;
+                hasOptionsShown = true;  // 標記選項已經顯示
             }
-        };
-    }
+        }, 3000);  // 延遲3秒 (3000毫秒)
+    };
+
+    // 當影片播放結束時
+    videoElement.onended = () => {
+        videoEndTime = new Date();
+
+        // 清除計時器，防止選項按鈕在影片結束後才出現
+        clearTimeout(optionsTimeout);
+
+        // 確保選項按鈕已經出現
+        if (!hasOptionsShown) {
+            currentQuestion.options.forEach((option, i) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => selectOption(i);
+                optionsContainer.appendChild(button);
+            });
+            optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
+            hasOptionsShown = true;
+        }
+    };
+
+    // 手動觸發播放，以確保自動播放在一些情況下正常工作
+    videoElement.play().catch((error) => {
+        console.error("影片無法自動播放: ", error);
+    });
+}
+
     
 
     function selectOption(selectedIndex) {
