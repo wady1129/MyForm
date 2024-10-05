@@ -223,7 +223,6 @@ function loadQuestion(index) {
     const currentQuestion = questions[index];
     let hasOptionsShown = false;  // 追蹤選項是否已顯示
     let firstplay = false;
-    let optionsTimeout;  // 計時器變數
 
     // 設定題目和選項容器
     questionElement.textContent = currentQuestion.question;
@@ -243,28 +242,28 @@ function loadQuestion(index) {
             startTime = new Date();
             firstplay = true;
 
-            // 設定 3 秒後顯示選項按鈕的計時器
-            optionsTimeout = setTimeout(() => {
-                if (!hasOptionsShown) {
-                    currentQuestion.options.forEach((option, i) => {
-                        const button = document.createElement("button");
-                        button.textContent = option;
-                        button.onclick = () => selectOption(i);
-                        optionsContainer.appendChild(button);
-                    });
-                    optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
-                    hasOptionsShown = true;  // 標記選項已經顯示
+            // 使用 setInterval 檢查影片播放時間是否達到 3 秒
+            const intervalId = setInterval(() => {
+                if (videoElement.currentTime >= 3) {
+                    clearInterval(intervalId); // 停止計時
+                    if (!hasOptionsShown) {
+                        currentQuestion.options.forEach((option, i) => {
+                            const button = document.createElement("button");
+                            button.textContent = option;
+                            button.onclick = () => selectOption(i);
+                            optionsContainer.appendChild(button);
+                        });
+                        optionsContainer.classList.remove("hidden");  // 顯示選項按鈕
+                        hasOptionsShown = true;  // 標記選項已經顯示
+                    }
                 }
-            }, 3000);  // 延遲3秒 (3000毫秒)
+            }, 100); // 每 100 毫秒檢查一次影片播放時間
         }
     };
 
     // 當影片播放結束時
     videoElement.onended = () => {
         videoEndTime = new Date();
-
-        // 清除計時器，防止選項按鈕在影片結束後才出現
-        clearTimeout(optionsTimeout);
 
         // 確保選項按鈕已經出現
         if (!hasOptionsShown) {
